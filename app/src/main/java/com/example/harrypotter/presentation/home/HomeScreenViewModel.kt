@@ -58,4 +58,9 @@ class HomeScreenViewModel @Inject constructor(
             }
         }
     }
+
+    fun searchCharacterByCharacterName(){
+        _state.value.characters =
+            _state.value.characters.filter { it.name.contains(characterName, ignoreCase = true) }
+    }
 }
