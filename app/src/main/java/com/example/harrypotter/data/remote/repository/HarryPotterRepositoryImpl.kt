@@ -1,12 +1,12 @@
 package com.example.harrypotter.data.remote.repository
 
-import com.example.harrypotter.data.remote.api.Api
+import com.example.harrypotter.data.remote.api.HarryPotterApi
 import com.example.harrypotter.data.remote.dto.SingleCharacter
-import com.example.harrypotter.domain.repository.Repository
+import com.example.harrypotter.domain.repository.HarryPotterRepository
 
-class RepositoryImpl(
-    private val api: Api
-) : Repository {
+class HarryPotterRepositoryImpl(
+    private val api: HarryPotterApi
+) : HarryPotterRepository {
     override suspend fun getAllCharacters(): List<SingleCharacter> {
         return api.getAllCharacters()
     }

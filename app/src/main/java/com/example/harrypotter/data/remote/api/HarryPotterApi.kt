@@ -4,7 +4,7 @@ import com.example.harrypotter.data.remote.dto.SingleCharacter
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface Api {
+interface HarryPotterApi {
 
     @GET("characters")
     suspend fun getAllCharacters(): List<SingleCharacter>
