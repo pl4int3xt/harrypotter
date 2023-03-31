@@ -20,6 +20,9 @@ class HomeScreenViewModel @Inject constructor(
 
     var houseName by mutableStateOf("")
     var characterName by mutableStateOf("")
+    var isSearchingByHouseName by mutableStateOf(false)
+    var isSearchingByCharacterName by mutableStateOf(false)
+
     init {
         getCharacters()
     }
