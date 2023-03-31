@@ -4,5 +4,5 @@ import com.example.harrypotter.data.remote.dto.SingleCharacter
 
 interface Repository {
     suspend fun getAllCharacters(): List<SingleCharacter>
-    suspend fun
+    suspend fun getCharacterByHouse(houseName: String): List<SingleCharacter>
 }
