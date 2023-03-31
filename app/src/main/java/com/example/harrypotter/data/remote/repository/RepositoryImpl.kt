@@ -5,7 +5,7 @@ import com.example.harrypotter.data.remote.dto.SingleCharacter
 import com.example.harrypotter.domain.repository.Repository
 
 class RepositoryImpl(
-    val api: Api
+    private val api: Api
 ) : Repository {
     override suspend fun getAllCharacters(): List<SingleCharacter> {
         return api.getAllCharacters()
