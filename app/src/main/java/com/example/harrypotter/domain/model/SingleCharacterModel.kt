@@ -1,10 +1,12 @@
-package com.example.harrypotter.data.remote.dto
+package com.example.harrypotter.domain.model
 
-data class SingleCharacter(
+import com.example.harrypotter.data.remote.dto.Wand
+
+data class SingleCharacterModel(
     val actor: String,
     val alive: Boolean,
-    val alternate_actors: List<String>,
-    val alternate_names: List<String>,
+    val alternateActors: List<String>,
+    val alternateNames: List<String>,
     val ancestry: String,
     val dateOfBirth: String,
     val eyeColour: String,
@@ -13,7 +15,6 @@ data class SingleCharacter(
     val hogwartsStaff: Boolean,
     val hogwartsStudent: Boolean,
     val house: String,
-    val id: String,
     val image: String,
     val name: String,
     val patronus: String,
