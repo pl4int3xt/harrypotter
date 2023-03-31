@@ -1,5 +1,7 @@
 package com.example.harrypotter.data.remote.dto
 
+import com.example.harrypotter.domain.model.SingleCharacterModel
+
 data class SingleCharacter(
     val actor: String,
     val alive: Boolean,
@@ -22,3 +24,27 @@ data class SingleCharacter(
     val wizard: Boolean,
     val yearOfBirth: Int
 )
+
+fun SingleCharacter.toSingleCharacterModel(): SingleCharacterModel {
+    return SingleCharacterModel(
+        actor = actor,
+        alive = alive,
+        alternateActors = alternate_actors,
+        alternateNames = alternate_names,
+        ancestry = ancestry,
+        dateOfBirth = dateOfBirth,
+        eyeColour = eyeColour,
+        gender = gender,
+        hairColour = hairColour,
+        hogwartsStaff = hogwartsStaff,
+        hogwartsStudent = hogwartsStudent,
+        house = house,
+        image = image,
+        name = name,
+        patronus = patronus,
+        species = species,
+        wand = wand,
+        wizard = wizard,
+        yearOfBirth = yearOfBirth
+    )
+}
