@@ -11,6 +11,7 @@ class DetailScreenViewModel: ViewModel() {
     fun onEvent(detailScreenEvents: DetailScreenEvents){
         when(detailScreenEvents){
             is DetailScreenEvents.OnImageClicked -> {
+                isImageClicked = true
                 clickedImage = detailScreenEvents.clickedImage
             }
         }
