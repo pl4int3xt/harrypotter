@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Cancel
+import androidx.compose.material.icons.rounded.Fullscreen
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun SearchBar(
+    onFilterClicked: () -> Unit,
     onSearch: () -> Unit,
     onReset: () -> Unit,
     value: String,
@@ -34,7 +36,8 @@ fun SearchBar(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     TextField(
-        modifier = Modifier.clip(RoundedCornerShape(15.dp))
+        modifier = Modifier
+            .clip(RoundedCornerShape(15.dp))
             .padding(5.dp)
             .fillMaxWidth()
         ,
@@ -59,17 +62,23 @@ fun SearchBar(
             }
         ),
         trailingIcon = {
-            IconButton(
-                onClick = {
-                    if (value.isNotEmpty()){
-                        onValueChange("")
-                        onReset()
-                    } else {
-                        onReset()
-                    }
+            if (value.isEmpty()){
+                IconButton(onClick = { onFilterClicked() }) {
+                    Icon(imageVector = Icons.Rounded.Fullscreen, contentDescription ="" )
                 }
-            ) {
-                Icon(imageVector = Icons.Rounded.Cancel, contentDescription = "cancel")
+            } else {
+                IconButton(
+                    onClick = {
+                        if (value.isNotEmpty()){
+                            onValueChange("")
+                            onReset()
+                        } else {
+                            onReset()
+                        }
+                    }
+                ) {
+                    Icon(imageVector = Icons.Rounded.Cancel, contentDescription = "cancel")
+                }
             }
         }
     )
