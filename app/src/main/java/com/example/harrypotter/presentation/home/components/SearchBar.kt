@@ -51,9 +51,3 @@ fun SearchBar(
         )
     )
 }
-
-@Preview
-@Composable
-fun SearchBarPrev() {
-    SearchBar()
-}
