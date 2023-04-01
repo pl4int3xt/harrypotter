@@ -13,11 +13,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.harrypotter.presentation.home.HomeScreenViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    navHostController: NavHostController,
     viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
@@ -29,7 +31,13 @@ fun HomeScreen(
                     Spacer(modifier = Modifier.height(it.calculateTopPadding()))
                 }
                 items(state.characters){
-                    SingleCard(name = it.name, image = it.image) {}
+                    SingleCard(name = it.name, image = it.image) {
+                        navHostController.currentBackStackEntry?.savedStateHandle?.set(
+                            key = "details",
+                            value = it
+                        )
+                        navHostController.navigate(Screen.CountryDetailScreen.route)
+                    }
                 }
                 item {
                     Spacer(modifier = Modifier.height(it.calculateBottomPadding()))
