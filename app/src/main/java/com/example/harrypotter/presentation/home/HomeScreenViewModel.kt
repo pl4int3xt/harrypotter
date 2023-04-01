@@ -5,10 +5,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.harrypotter.common.Resource
 import com.example.harrypotter.domain.use_case.GetAllCharactersUseCase
 import com.example.harrypotter.domain.use_case.GetCharacterByHouseUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
@@ -23,12 +25,12 @@ class HomeScreenViewModel @Inject constructor(
     var isSearchingByHouseName by mutableStateOf(false)
     var isSearchingByCharacterName by mutableStateOf(false)
 
+    private val _state = mutableStateOf(HomeScreenState())
+    val state: State<HomeScreenState> = _state
+
     init {
         getCharacters()
     }
-
-    private val _state = mutableStateOf(HomeScreenState())
-    val state: State<HomeScreenState> = _state
 
     fun getCharacters(){
         getAllCharactersUseCase().onEach { result ->
@@ -43,7 +45,7 @@ class HomeScreenViewModel @Inject constructor(
                     _state.value = HomeScreenState(message = result.message ?:"")
                 }
             }
-        }
+        }.launchIn(viewModelScope)
     }
 
     fun getCharactersByHouseName(){
@@ -59,7 +61,7 @@ class HomeScreenViewModel @Inject constructor(
                     _state.value = HomeScreenState(message = result.message ?:"")
                 }
             }
-        }
+        }.launchIn(viewModelScope)
     }
 
     fun searchCharacterByCharacterName(){
