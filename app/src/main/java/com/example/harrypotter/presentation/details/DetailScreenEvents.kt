@@ -1,4 +1,5 @@
 package com.example.harrypotter.presentation.details
 
-class DetailScreenEvents {
+sealed class DetailScreenEvents {
+    data class OnImageClicked(val clickedImage: String): DetailScreenEvents()
 }
