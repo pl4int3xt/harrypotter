@@ -3,6 +3,8 @@ package com.example.harrypotter.presentation.navigation
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.example.harrypotter.domain.model.SingleCharacterModel
@@ -23,10 +25,10 @@ fun MainNavGraph(
     ){
         composable(
             route = Screens.HomeScreen.route,
-            enterTransition = {
+            popExitTransition = {
                 when (targetState.destination.route) {
                     navHostController.currentDestination?.route ->
-                        slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+                        slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(1000))
                     else -> null
                 }
             }
