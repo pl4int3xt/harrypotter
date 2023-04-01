@@ -8,6 +8,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Cancel
 import androidx.compose.material.icons.rounded.Fullscreen
+import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -64,7 +65,7 @@ fun SearchBar(
         trailingIcon = {
             if (value.isEmpty()){
                 IconButton(onClick = { onFilterClicked() }) {
-                    Icon(imageVector = Icons.Rounded.Fullscreen, contentDescription ="" )
+                    Icon(imageVector = Icons.Rounded.Tune, contentDescription ="" )
                 }
             } else {
                 IconButton(
