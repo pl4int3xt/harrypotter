@@ -67,33 +67,6 @@ fun HomeScreen(
             )
         }
     ) {
-        Box(modifier = Modifier.fillMaxSize()){
-            LazyColumn(){
-                item {
-                    Spacer(modifier = Modifier.height(it.calculateTopPadding()))
-                }
-                items(characters){
-                    SingleCard(name = it.name, image = it.image) {
-                        navHostController.currentBackStackEntry?.savedStateHandle?.set(
-                            key = "details",
-                            value = it
-                        )
-                        navHostController.navigate(Screens.DetailsScreen.route)
-                    }
-                }
-                item {
-                    Spacer(modifier = Modifier.height(it.calculateBottomPadding()))
-                }
-            }
-            if (state.isLoading){
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
-            if (viewModel.filterDialogState){
-                FilterDialog(viewModel = viewModel)
-            }
-        }
         if (state.message.isNotEmpty()){
             Column(
                 modifier = Modifier
@@ -109,6 +82,34 @@ fun HomeScreen(
                     color = MaterialTheme.colorScheme.primary,
                     fontSize = 25.sp
                 )
+            }
+        } else {
+            Box(modifier = Modifier.fillMaxSize()){
+                LazyColumn(){
+                    item {
+                        Spacer(modifier = Modifier.height(it.calculateTopPadding()))
+                    }
+                    items(characters){
+                        SingleCard(name = it.name, image = it.image) {
+                            navHostController.currentBackStackEntry?.savedStateHandle?.set(
+                                key = "details",
+                                value = it
+                            )
+                            navHostController.navigate(Screens.DetailsScreen.route)
+                        }
+                    }
+                    item {
+                        Spacer(modifier = Modifier.height(it.calculateBottomPadding()))
+                    }
+                }
+                if (state.isLoading){
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+                if (viewModel.filterDialogState){
+                    FilterDialog(viewModel = viewModel)
+                }
             }
         }
     }
