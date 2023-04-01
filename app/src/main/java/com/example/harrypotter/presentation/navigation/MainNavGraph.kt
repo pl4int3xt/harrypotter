@@ -23,13 +23,6 @@ fun MainNavGraph(
     ){
         composable(
             route = Screens.HomeScreen.route,
-            enterTransition = {
-                when (targetState.destination.route) {
-                    navHostController.currentDestination?.route ->
-                        slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
-                    else -> null
-                }
-            },
             popExitTransition = {
                 when (targetState.destination.route) {
                     navHostController.currentDestination?.route ->
