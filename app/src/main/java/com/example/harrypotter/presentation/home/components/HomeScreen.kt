@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.harrypotter.presentation.home.HomeScreenViewModel
+import com.example.harrypotter.presentation.screens.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +37,7 @@ fun HomeScreen(
                             key = "details",
                             value = it
                         )
-                        navHostController.navigate(Screen.CountryDetailScreen.route)
+                        navHostController.navigate(Screens.DetailsScreen.route)
                     }
                 }
                 item {
