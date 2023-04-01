@@ -55,6 +55,7 @@ fun HomeScreen(
             TopAppBar(
                 navigationIcon = {
                     SearchBar(
+                        onFilterClicked = { viewModel.filterDialogState = true },
                         onSearch = {
                             if (viewModel.isSearchingByCharacterName)
                                 viewModel.onEvent(HomeScreenEvents.OnSearchByCharacterName)
@@ -64,11 +65,7 @@ fun HomeScreen(
                         onValueChange = { viewModel.onEvent(HomeScreenEvents.OnSearchValueChanged(it))},
                         onReset = { viewModel.onEvent(HomeScreenEvents.OnReset)}
                     ) },
-                title = {
-                    IconButton(onClick = { viewModel.filterDialogState = true }) {
-                        Icons.Rounded.PhotoFilter
-                    }
-                },
+                title = {},
                 scrollBehavior = scrollBehavior
             )
         }
