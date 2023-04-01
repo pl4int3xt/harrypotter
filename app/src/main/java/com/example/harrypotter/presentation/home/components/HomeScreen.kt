@@ -83,6 +83,8 @@ fun HomeScreen(
                     fontSize = 25.sp
                 )
             }
+        } else if (viewModel.filterDialogState) {
+            FilterDialog(viewModel = viewModel)
         } else {
             Box(modifier = Modifier.fillMaxSize()){
                 LazyColumn(){
@@ -106,9 +108,6 @@ fun HomeScreen(
                     CircularProgressIndicator(
                         modifier = Modifier.align(Alignment.Center)
                     )
-                }
-                if (viewModel.filterDialogState){
-                    FilterDialog(viewModel = viewModel)
                 }
             }
         }
