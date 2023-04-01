@@ -8,7 +8,10 @@ import androidx.compose.ui.tooling.preview.Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar() {
-    TextField(value = "", onValueChange = {})
+    TextField(
+        value = "",
+        onValueChange = {}
+    )
 }
 
 @Preview
