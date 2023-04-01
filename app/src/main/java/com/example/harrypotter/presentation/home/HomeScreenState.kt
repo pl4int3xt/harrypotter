@@ -4,6 +4,5 @@ import com.example.harrypotter.domain.model.SingleCharacterModel
 
 data class HomeScreenState(
     val isLoading: Boolean = false,
-    val message: String = "",
-    var characters: List<SingleCharacterModel> = emptyList()
+    val message: String = ""
 )

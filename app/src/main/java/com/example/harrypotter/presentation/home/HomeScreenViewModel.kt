@@ -1,5 +1,6 @@
 package com.example.harrypotter.presentation.home
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,6 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.harrypotter.common.Resource
+import com.example.harrypotter.domain.model.SingleCharacterModel
 import com.example.harrypotter.domain.use_case.GetAllCharactersUseCase
 import com.example.harrypotter.domain.use_case.GetCharacterByHouseUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +21,7 @@ class HomeScreenViewModel @Inject constructor(
     private val getAllCharactersUseCase: GetAllCharactersUseCase,
     private val getCharacterByHouseUseCase: GetCharacterByHouseUseCase
 ):ViewModel(){
-
+    val allCharacters: MutableState<List<SingleCharacterModel>> = mutableStateOf(ArrayList())
     var searchValue by mutableStateOf("")
 //    var isSearchingByHouseName by mutableStateOf(false)
     var isSearchingByCharacterName by mutableStateOf(false)
@@ -35,7 +37,7 @@ class HomeScreenViewModel @Inject constructor(
         getAllCharactersUseCase().onEach { result ->
             when(result){
                 is Resource.Success -> {
-                    _state.value = HomeScreenState(characters = result.data ?: emptyList())
+                    this.allCharacters.value = result.data?: emptyList()
                 }
                 is Resource.Loading -> {
                     _state.value = HomeScreenState(isLoading = true)
@@ -51,7 +53,7 @@ class HomeScreenViewModel @Inject constructor(
         getCharacterByHouseUseCase(searchValue).onEach { result ->
             when(result){
                 is Resource.Success -> {
-                    _state.value = HomeScreenState(characters = result.data ?: emptyList())
+                    this.allCharacters.value = result.data?: emptyList()
                 }
                 is Resource.Loading -> {
                     _state.value = HomeScreenState(isLoading = true)
@@ -64,7 +66,7 @@ class HomeScreenViewModel @Inject constructor(
     }
 
     private fun searchCharacterByCharacterName(){
-        _state.value.characters = state.value.characters.filter { it.name.contains(searchValue, ignoreCase = true) }
+        this.allCharacters.value = this.allCharacters.value.filter { it.name.contains(searchValue, ignoreCase = true) }
     }
 
     fun onEvent(homeScreenEvents: HomeScreenEvents){

@@ -29,6 +29,7 @@ fun HomeScreen(
     viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
+    val characters = viewModel.allCharacters.value
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -55,7 +56,7 @@ fun HomeScreen(
                 item {
                     Spacer(modifier = Modifier.height(it.calculateTopPadding()))
                 }
-                items(state.characters){
+                items(characters){
                     SingleCard(name = it.name, image = it.image) {
                         navHostController.currentBackStackEntry?.savedStateHandle?.set(
                             key = "details",
