@@ -3,7 +3,11 @@ package com.example.harrypotter.presentation.home.components
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Cancel
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -21,6 +25,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SearchBar(
     onSearch: () -> Unit,
+    onReset: () -> Unit,
     value: String,
     onValueChange: (String) -> Unit
 ) {
@@ -47,6 +52,20 @@ fun SearchBar(
                 onSearch()
                 keyboardController?.hide()
             }
-        )
+        ),
+        trailingIcon = {
+            IconButton(
+                onClick = {
+                    if (value.isNotEmpty()){
+                        onValueChange("")
+                        onReset()
+                    } else {
+                        onReset()
+                    }
+                }
+            ) {
+                Icon(imageVector = Icons.Rounded.Cancel, contentDescription = "cancel")
+            }
+        }
     )
 }

@@ -5,4 +5,5 @@ sealed class HomeScreenEvents {
     object OnSearchByCharacterName: HomeScreenEvents()
     object OnSearchByHouseName: HomeScreenEvents()
     data class OnIsSearchingByCharacterNameChecked(val isSearchingByCharacterName: Boolean): HomeScreenEvents()
+    object OnReset: HomeScreenEvents()
 }

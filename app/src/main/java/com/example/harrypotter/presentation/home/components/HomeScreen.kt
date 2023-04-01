@@ -22,6 +22,7 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
@@ -60,7 +61,8 @@ fun HomeScreen(
                             else
                                 viewModel.onEvent(HomeScreenEvents.OnSearchByHouseName) },
                         value = viewModel.searchValue,
-                        onValueChange = { viewModel.onEvent(HomeScreenEvents.OnSearchValueChanged(it))}
+                        onValueChange = { viewModel.onEvent(HomeScreenEvents.OnSearchValueChanged(it))},
+                        onReset = { viewModel.onEvent(HomeScreenEvents.OnReset)}
                     )
                 },
                 scrollBehavior = scrollBehavior

@@ -85,6 +85,7 @@ class HomeScreenViewModel @Inject constructor(
             is HomeScreenEvents.OnIsSearchingByCharacterNameChecked -> {
                 isSearchingByCharacterName = homeScreenEvents.isSearchingByCharacterName
             }
+            is HomeScreenEvents.OnReset -> { getCharacters() }
         }
     }
 }
