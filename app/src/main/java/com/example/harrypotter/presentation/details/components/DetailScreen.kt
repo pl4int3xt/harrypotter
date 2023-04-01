@@ -111,7 +111,7 @@ fun DetailsScreen(
                 AsyncImage(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    contentScale = ContentScale.FillBounds,
+                    contentScale = ContentScale.Fit,
                     model = singleCharacterModel.image,
                     contentDescription = "image"
                 )
