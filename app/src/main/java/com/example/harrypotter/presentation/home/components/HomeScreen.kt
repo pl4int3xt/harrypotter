@@ -10,9 +10,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.PhotoFilter
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -50,10 +53,7 @@ fun HomeScreen(
         ,
         topBar = {
             TopAppBar(
-                navigationIcon = { Button(onClick = { viewModel.filterDialogState = true }) {
-
-                }},
-                title = {
+                navigationIcon = {
                     SearchBar(
                         onSearch = {
                             if (viewModel.isSearchingByCharacterName)
@@ -63,7 +63,11 @@ fun HomeScreen(
                         value = viewModel.searchValue,
                         onValueChange = { viewModel.onEvent(HomeScreenEvents.OnSearchValueChanged(it))},
                         onReset = { viewModel.onEvent(HomeScreenEvents.OnReset)}
-                    )
+                    ) },
+                title = {
+                    IconButton(onClick = { viewModel.filterDialogState = true }) {
+                        Icons.Rounded.PhotoFilter
+                    }
                 },
                 scrollBehavior = scrollBehavior
             )
@@ -97,7 +101,8 @@ fun HomeScreen(
             }
             if (state.message.isNotEmpty()){
                 Column(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
                         .padding(16.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
