@@ -20,9 +20,8 @@ class HomeScreenViewModel @Inject constructor(
     private val getCharacterByHouseUseCase: GetCharacterByHouseUseCase
 ):ViewModel(){
 
-    var houseName by mutableStateOf("")
-    var characterName by mutableStateOf("")
-    var isSearchingByHouseName by mutableStateOf(false)
+    var searchValue by mutableStateOf("")
+//    var isSearchingByHouseName by mutableStateOf(false)
     var isSearchingByCharacterName by mutableStateOf(false)
 
     private val _state = mutableStateOf(HomeScreenState())
@@ -48,8 +47,8 @@ class HomeScreenViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun getCharactersByHouseName(){
-        getCharacterByHouseUseCase(houseName).onEach { result ->
+    private fun getCharactersByHouseName(){
+        getCharacterByHouseUseCase(searchValue).onEach { result ->
             when(result){
                 is Resource.Success -> {
                     _state.value = HomeScreenState(characters = result.data ?: emptyList())
@@ -64,8 +63,22 @@ class HomeScreenViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun searchCharacterByCharacterName(){
+    private fun searchCharacterByCharacterName(){
         _state.value.characters =
-            _state.value.characters.filter { it.name.contains(characterName, ignoreCase = true) }
+            _state.value.characters.filter { it.name.contains(searchValue, ignoreCase = true) }
+    }
+
+    fun onEvent(homeScreenEvents: HomeScreenEvents){
+        when(homeScreenEvents){
+            is HomeScreenEvents.OnSearchValueChanged -> {
+                searchValue = homeScreenEvents.searchValue
+            }
+            is HomeScreenEvents.OnSearchByCharacterName -> {
+                searchCharacterByCharacterName()
+            }
+            is HomeScreenEvents.OnSearchByHouseName -> {
+                getCharactersByHouseName()
+            }
+        }
     }
 }

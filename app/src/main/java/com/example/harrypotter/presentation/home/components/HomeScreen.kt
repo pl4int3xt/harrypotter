@@ -11,10 +11,14 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.harrypotter.presentation.home.HomeScreenEvents
 import com.example.harrypotter.presentation.home.HomeScreenViewModel
 import com.example.harrypotter.presentation.screens.Screens
 
@@ -25,16 +29,24 @@ fun HomeScreen(
     viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = {
                     SearchBar(
-                        onSearch = { /*TODO*/ },
-                        value = if (viewModel.isSearchingByCharacterName) viewModel.characterName else viewModel.houseName,
-                        onValueChange = {})
-                }
+                        onSearch = {
+                            if (viewModel.isSearchingByCharacterName)
+                                viewModel.onEvent(HomeScreenEvents.OnSearchByCharacterName)
+                            else
+                                viewModel.onEvent(HomeScreenEvents.OnSearchByHouseName) },
+                        value = viewModel.searchValue,
+                        onValueChange = { viewModel.onEvent(HomeScreenEvents.OnSearchValueChanged(it))}
+                    )
+                },
+                scrollBehavior = scrollBehavior
             )
         }
     ) {
