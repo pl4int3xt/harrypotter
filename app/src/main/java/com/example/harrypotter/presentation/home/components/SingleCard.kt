@@ -39,7 +39,7 @@ fun SingleCard(
             modifier = Modifier
                 .padding(5.dp)
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(300.dp)
                 .clip(shape = RoundedCornerShape(20.dp))
         )
         Spacer(modifier = Modifier.height(5.dp))
