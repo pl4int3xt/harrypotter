@@ -43,7 +43,7 @@ fun DetailsScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(400.dp)
+                        .height(350.dp)
                         .graphicsLayer {
                             translationY = 0.4f * scrollState.value
                         }
