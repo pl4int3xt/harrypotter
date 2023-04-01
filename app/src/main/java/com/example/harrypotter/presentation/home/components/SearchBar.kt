@@ -1,5 +1,7 @@
 package com.example.harrypotter.presentation.home.components
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -32,7 +34,10 @@ fun SearchBar(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     TextField(
-        modifier = Modifier.clip(RoundedCornerShape(15.dp)),
+        modifier = Modifier.clip(RoundedCornerShape(15.dp))
+            .padding(5.dp)
+            .fillMaxWidth()
+        ,
         value = value,
         placeholder = { Text(text = "search here ...") },
         onValueChange = { onValueChange(it) },
