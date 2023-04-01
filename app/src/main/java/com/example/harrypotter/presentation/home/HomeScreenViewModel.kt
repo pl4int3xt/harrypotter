@@ -21,9 +21,9 @@ class HomeScreenViewModel @Inject constructor(
     private val getAllCharactersUseCase: GetAllCharactersUseCase,
     private val getCharacterByHouseUseCase: GetCharacterByHouseUseCase
 ):ViewModel(){
+    var filterDialogState by mutableStateOf(false)
     val allCharacters: MutableState<List<SingleCharacterModel>> = mutableStateOf(ArrayList())
     var searchValue by mutableStateOf("")
-//    var isSearchingByHouseName by mutableStateOf(false)
     var isSearchingByCharacterName by mutableStateOf(false)
 
     private val _state = mutableStateOf(HomeScreenState())
@@ -81,6 +81,9 @@ class HomeScreenViewModel @Inject constructor(
             }
             is HomeScreenEvents.OnSearchByHouseName -> {
                 getCharactersByHouseName()
+            }
+            is HomeScreenEvents.OnIsSearchingByCharacterNameChecked -> {
+                isSearchingByCharacterName = homeScreenEvents.isSearchingByCharacterName
             }
         }
     }
