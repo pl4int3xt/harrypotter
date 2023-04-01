@@ -67,46 +67,46 @@ fun HomeScreen(
             )
         }
     ) {
-        if (state.message.isNotEmpty()){
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = state.message)
-                Text(
-                    modifier = Modifier.clickable { viewModel.getCharacters() },
-                    text = "Refresh",
-                    color = MaterialTheme.colorScheme.primary,
-                    fontSize = 25.sp
-                )
-            }
-        } else if (viewModel.filterDialogState) {
-            FilterDialog(viewModel = viewModel)
-        } else {
-            Box(modifier = Modifier.fillMaxSize()){
-                LazyColumn(){
-                    item {
-                        Spacer(modifier = Modifier.height(it.calculateTopPadding()))
-                    }
-                    items(characters){
-                        SingleCard(name = it.name, image = it.image) {
-                            navHostController.currentBackStackEntry?.savedStateHandle?.set(
-                                key = "details",
-                                value = it
-                            )
-                            navHostController.navigate(Screens.DetailsScreen.route)
-                        }
-                    }
-                    item {
-                        Spacer(modifier = Modifier.height(it.calculateBottomPadding()))
+        Box(modifier = Modifier.fillMaxSize()){
+            LazyColumn(){
+                item {
+                    Spacer(modifier = Modifier.height(it.calculateTopPadding()))
+                }
+                items(characters){
+                    SingleCard(name = it.name, image = it.image) {
+                        navHostController.currentBackStackEntry?.savedStateHandle?.set(
+                            key = "details",
+                            value = it
+                        )
+                        navHostController.navigate(Screens.DetailsScreen.route)
                     }
                 }
-                if (state.isLoading){
-                    CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center)
+                item {
+                    Spacer(modifier = Modifier.height(it.calculateBottomPadding()))
+                }
+            }
+            if (state.isLoading){
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
+            if (viewModel.filterDialogState){
+                FilterDialog(viewModel = viewModel)
+            }
+            if (state.message.isNotEmpty()){
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = state.message)
+                    Text(
+                        modifier = Modifier.clickable { viewModel.getCharacters() },
+                        text = "Refresh",
+                        color = MaterialTheme.colorScheme.primary,
+                        fontSize = 25.sp
                     )
                 }
             }
