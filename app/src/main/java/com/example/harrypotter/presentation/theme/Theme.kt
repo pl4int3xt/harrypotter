@@ -67,7 +67,7 @@ fun HarrypotterTheme(
     val systemUiController = rememberSystemUiController()
     SideEffect {
         systemUiController.setSystemBarsColor(
-            color = Color.Transparent,
+            color = Color.Transparent.copy(alpha = 0.05f),
             darkIcons = !darkTheme
         )
     }
