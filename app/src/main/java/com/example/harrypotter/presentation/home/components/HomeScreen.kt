@@ -93,22 +93,22 @@ fun HomeScreen(
             if (viewModel.filterDialogState){
                 FilterDialog(viewModel = viewModel)
             }
-            if (state.message.isNotEmpty()){
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(text = state.message)
-                    Text(
-                        modifier = Modifier.clickable { viewModel.getCharacters() },
-                        text = "Refresh",
-                        color = MaterialTheme.colorScheme.primary,
-                        fontSize = 25.sp
-                    )
-                }
+        }
+        if (state.message.isNotEmpty()){
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = state.message)
+                Text(
+                    modifier = Modifier.clickable { viewModel.getCharacters() },
+                    text = "Refresh",
+                    color = MaterialTheme.colorScheme.primary,
+                    fontSize = 25.sp
+                )
             }
         }
     }
