@@ -64,8 +64,7 @@ class HomeScreenViewModel @Inject constructor(
     }
 
     private fun searchCharacterByCharacterName(){
-        _state.value.characters =
-            _state.value.characters.filter { it.name.contains(searchValue, ignoreCase = true) }
+        _state.value.characters = state.value.characters.filter { it.name.contains(searchValue, ignoreCase = true) }
     }
 
     fun onEvent(homeScreenEvents: HomeScreenEvents){
