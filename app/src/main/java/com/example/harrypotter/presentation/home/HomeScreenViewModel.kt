@@ -24,7 +24,7 @@ class HomeScreenViewModel @Inject constructor(
     val allCharacters: MutableState<List<SingleCharacterModel>> = mutableStateOf(ArrayList())
     var searchValue by mutableStateOf("")
 //    var isSearchingByHouseName by mutableStateOf(false)
-    var isSearchingByCharacterName by mutableStateOf(false)
+    var isSearchingByCharacterName by mutableStateOf(true)
 
     private val _state = mutableStateOf(HomeScreenState())
     val state: State<HomeScreenState> = _state
