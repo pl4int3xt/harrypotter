@@ -24,7 +24,7 @@ class HomeScreenViewModel @Inject constructor(
     val allCharacters: MutableState<List<SingleCharacterModel>> = mutableStateOf(ArrayList())
     var searchValue by mutableStateOf("")
 //    var isSearchingByHouseName by mutableStateOf(false)
-    var isSearchingByCharacterName by mutableStateOf(true)
+    var isSearchingByCharacterName by mutableStateOf(false)
 
     private val _state = mutableStateOf(HomeScreenState())
     val state: State<HomeScreenState> = _state
@@ -38,6 +38,7 @@ class HomeScreenViewModel @Inject constructor(
             when(result){
                 is Resource.Success -> {
                     this.allCharacters.value = result.data?: emptyList()
+                    _state.value = HomeScreenState(isLoading = false)
                 }
                 is Resource.Loading -> {
                     _state.value = HomeScreenState(isLoading = true)
@@ -54,6 +55,7 @@ class HomeScreenViewModel @Inject constructor(
             when(result){
                 is Resource.Success -> {
                     this.allCharacters.value = result.data?: emptyList()
+                    _state.value = HomeScreenState(isLoading = false)
                 }
                 is Resource.Loading -> {
                     _state.value = HomeScreenState(isLoading = true)
