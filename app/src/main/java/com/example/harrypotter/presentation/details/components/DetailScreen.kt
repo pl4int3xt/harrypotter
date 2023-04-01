@@ -20,6 +20,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Cancel
+import androidx.compose.material.icons.rounded.Cancel
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -68,35 +69,11 @@ fun DetailsScreen(
                     containerColor = Color.Transparent ),
                 navigationIcon = {
                     if (viewModel.isImageClicked){
-                        Button(
-                            modifier = Modifier.size(50.dp),
-                            shape = CircleShape,
-                            contentPadding = PaddingValues(10.dp),
-                            elevation = ButtonDefaults.buttonElevation(
-                                defaultElevation = 5.dp,
-                                pressedElevation = 5.dp,
-                                focusedElevation = 5.dp,
-                                hoveredElevation = 5.dp,
-                            ),
-                            onClick = { viewModel.isImageClicked = false }
-                        ){
-                            Icon(imageVector = Icons.Default.Cancel, contentDescription = "cancel")
-                        }
+                        NavigationButton(onClick = { viewModel.isImageClicked = false },
+                            icon = Icons.Rounded.Cancel)
                     } else {
-                        Button(
-                            modifier = Modifier.size(50.dp),
-                            shape = CircleShape,
-                            contentPadding = PaddingValues(10.dp),
-                            elevation = ButtonDefaults.buttonElevation(
-                                defaultElevation = 5.dp,
-                                pressedElevation = 5.dp,
-                                focusedElevation = 5.dp,
-                                hoveredElevation = 5.dp,
-                            ),
-                            onClick = { navHostController.popBackStack() }
-                        ){
-                            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "arrow back")
-                        }
+                        NavigationButton(onClick = { navHostController.popBackStack() },
+                            icon = Icons.Default.ArrowBack)
                     }
                 },
                 title = {}
@@ -132,7 +109,13 @@ fun DetailsScreen(
                         AsyncImage(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { viewModel.onEvent(DetailScreenEvents.OnImageClicked(singleCharacterModel.image)) },
+                                .clickable {
+                                    viewModel.onEvent(
+                                        DetailScreenEvents.OnImageClicked(
+                                            singleCharacterModel.image
+                                        )
+                                    )
+                                },
                             contentScale = ContentScale.Crop,
                             model = singleCharacterModel.image,
                             contentDescription = "image"
