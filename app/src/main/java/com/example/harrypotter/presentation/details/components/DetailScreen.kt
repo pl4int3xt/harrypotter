@@ -5,6 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -48,7 +50,7 @@ fun DetailsScreen(
                 ) {
                     AsyncImage(
                         modifier = Modifier.fillMaxWidth(),
-                        contentScale = ContentScale.FillBounds,
+                        contentScale = ContentScale.Crop,
                         model = singleCharacterModel.image,
                         contentDescription = "image"
                     )
@@ -62,15 +64,39 @@ fun DetailsScreen(
                     Column(
                         modifier = Modifier
                             .padding(10.dp)
-                            .background(
-                                color = if (isSystemInDarkTheme()) Color.Black else Color.White
-                            )
                     ) {
                         Text(
                             text = singleCharacterModel.name,
                             fontWeight = FontWeight.Bold,
                             fontSize = 35.sp
                         )
+                        Text(
+                            text = singleCharacterModel.actor,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 35.sp
+                        )
+                        Text(
+                            text = "Details",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 35.sp
+                        )
+                        DetailsRow(title = "Species", value = singleCharacterModel.species)
+                        DetailsRow(title = "Gender", value = singleCharacterModel.gender)
+                        DetailsRow(title = "House", value = singleCharacterModel.house)
+                        DetailsRow(title = "Date of birth", value = singleCharacterModel.dateOfBirth)
+                        DetailsRow(title = "Year of birth", value = singleCharacterModel.yearOfBirth)
+                        DetailsRow(title = "Wizard", value = singleCharacterModel.wizard)
+                        DetailsRow(title = "Ancestry", value = singleCharacterModel.ancestry)
+                        DetailsRow(title = "Eye colour", value = singleCharacterModel.eyeColour)
+                        DetailsRow(title = "Hair colour", value = singleCharacterModel.hairColour)
+                        DetailsRow(title = "Wand wood", value = singleCharacterModel.wand.wood)
+                        DetailsRow(title = "Wand core", value = singleCharacterModel.wand.core)
+                        DetailsRow(title = "Wand length", value = singleCharacterModel.wand.length)
+                        DetailsRow(title = "Patronus", value =singleCharacterModel.patronus)
+                        DetailsRow(title = "Hogwarts student", value = singleCharacterModel.hogwartsStudent)
+                        DetailsRow(title = "Hogwarts staff", value = singleCharacterModel.hogwartsStaff)
+                        DetailsRow(title = "Alternative actors", value = singleCharacterModel.alternateActors)
+                        DetailsRow(title = "Alive", value = singleCharacterModel.alive)
                     }
                 }
             }
