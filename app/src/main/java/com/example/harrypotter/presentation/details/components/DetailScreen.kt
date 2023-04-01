@@ -43,7 +43,7 @@ fun DetailsScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(300.dp)
+                        .height(400.dp)
                         .graphicsLayer {
                             translationY = 0.4f * scrollState.value
                         }
@@ -57,9 +57,6 @@ fun DetailsScreen(
                 }
                 Column(
                     modifier = Modifier
-                        .background(
-                            color = if (isSystemInDarkTheme()) Color.Black else Color.White
-                        )
                 ) {
                     Column(
                         modifier = Modifier
