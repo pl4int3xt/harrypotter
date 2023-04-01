@@ -78,6 +78,7 @@ fun DetailsScreen(
                             fontWeight = FontWeight.Bold,
                             fontSize = 35.sp
                         )
+                        Spacer(modifier = Modifier.height(10.dp))
                         DetailsRow(title = "Species", value = singleCharacterModel.species)
                         DetailsRow(title = "Gender", value = singleCharacterModel.gender)
                         DetailsRow(title = "House", value = singleCharacterModel.house)

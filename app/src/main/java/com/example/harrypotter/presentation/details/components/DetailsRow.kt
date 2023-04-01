@@ -28,5 +28,5 @@ fun DetailsRow(
             fontSize = 20.sp
         )
     }
-    Spacer(modifier = Modifier.height(5.dp))
+    Spacer(modifier = Modifier.height(10.dp))
 }
