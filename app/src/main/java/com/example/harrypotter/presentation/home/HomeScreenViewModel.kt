@@ -21,6 +21,7 @@ class HomeScreenViewModel @Inject constructor(
     private val getAllCharactersUseCase: GetAllCharactersUseCase,
     private val getCharacterByHouseUseCase: GetCharacterByHouseUseCase
 ):ViewModel(){
+    var messageDialogState by mutableStateOf(false)
     var filterDialogState by mutableStateOf(false)
     val allCharacters: MutableState<List<SingleCharacterModel>> = mutableStateOf(ArrayList())
     var searchValue by mutableStateOf("")
