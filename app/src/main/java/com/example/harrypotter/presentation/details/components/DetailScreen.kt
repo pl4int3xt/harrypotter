@@ -154,7 +154,7 @@ fun DetailsScreen(
                             DetailsRow(title = "Patronus", value =singleCharacterModel.patronus)
                             DetailsRow(title = "Hogwarts student", value = singleCharacterModel.hogwartsStudent)
                             DetailsRow(title = "Hogwarts staff", value = singleCharacterModel.hogwartsStaff)
-                            DetailsRow(title = "Alternative actors", value = singleCharacterModel.alternateActors)
+                            DetailsRow(title = "Alternative actors", value = singleCharacterModel.alternateActors.map { it })
                             DetailsRow(title = "Alive", value = singleCharacterModel.alive)
                         }
                     }
