@@ -58,7 +58,7 @@ fun FilterDialog(
                         checked = viewModel.isSearchingByCharacterName,
                         onCheckedChange = {
                             viewModel.isSearchingByCharacterName = true
-                            viewModel.isSearchingByCharacterName = false
+                            viewModel.isSearchByHouseName = false
                         }
                     )
                 }
