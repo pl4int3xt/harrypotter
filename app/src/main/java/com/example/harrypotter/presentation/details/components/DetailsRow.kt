@@ -15,7 +15,7 @@ fun DetailsRow(
     isList: Boolean = false,
     list: List<String> = emptyList(),
     title: String,
-    value: Any
+    value: Any? = null
 ) {
     Row() {
         Text(
