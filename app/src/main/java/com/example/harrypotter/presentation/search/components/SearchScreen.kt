@@ -42,6 +42,7 @@ fun SearchScreen(
             TopAppBar(
                 navigationIcon = {
                     SearchBar(
+                        onPopBackStack = { navHostController.popBackStack() },
                         onLeadingIconClicked = { navHostController.popBackStack() },
                         onFilterClicked = { viewModel.filterDialogState = true },
                         onSearch = {

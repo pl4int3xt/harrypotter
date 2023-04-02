@@ -25,7 +25,8 @@ class HomeScreenViewModel @Inject constructor(
     var filterDialogState by mutableStateOf(false)
     val allCharacters: MutableState<List<SingleCharacterModel>> = mutableStateOf(ArrayList())
     var searchValue by mutableStateOf("")
-    var isSearchingByCharacterName by mutableStateOf(false)
+    var isSearchingByCharacterName by mutableStateOf(true)
+    var isSearchByHouseName by mutableStateOf(false)
 
     private val _state = mutableStateOf(HomeScreenState())
     val state: State<HomeScreenState> = _state
@@ -82,9 +83,6 @@ class HomeScreenViewModel @Inject constructor(
             }
             is HomeScreenEvents.OnSearchByHouseName -> {
                 getCharactersByHouseName()
-            }
-            is HomeScreenEvents.OnIsSearchingByCharacterNameChecked -> {
-                isSearchingByCharacterName = homeScreenEvents.isSearchingByCharacterName
             }
             is HomeScreenEvents.OnReset -> { getCharacters() }
         }

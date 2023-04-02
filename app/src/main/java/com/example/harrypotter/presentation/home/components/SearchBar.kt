@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun SearchBar(
+    onPopBackStack: () -> Unit,
     onFilterClicked: () -> Unit,
     onLeadingIconClicked:() -> Unit,
     onSearch: () -> Unit,
@@ -80,7 +81,7 @@ fun SearchBar(
                             onValueChange("")
                             onReset()
                         } else {
-                            onReset()
+                            onPopBackStack()
                         }
                     }
                 ) {

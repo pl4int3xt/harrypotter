@@ -56,7 +56,10 @@ fun FilterDialog(
                     Spacer(modifier = Modifier.weight(1f))
                     Checkbox(
                         checked = viewModel.isSearchingByCharacterName,
-                        onCheckedChange = { viewModel.onEvent(HomeScreenEvents.OnIsSearchingByCharacterNameChecked(it)) }
+                        onCheckedChange = {
+                            viewModel.isSearchingByCharacterName = true
+                            viewModel.isSearchingByCharacterName = false
+                        }
                     )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
@@ -64,8 +67,11 @@ fun FilterDialog(
                     Text(text = "House name")
                     Spacer(modifier = Modifier.weight(1f))
                     Checkbox(
-                        checked = !viewModel.isSearchingByCharacterName,
-                        onCheckedChange = { viewModel.onEvent(HomeScreenEvents.OnIsSearchingByCharacterNameChecked(it)) }
+                        checked = viewModel.isSearchByHouseName,
+                        onCheckedChange = {
+                            viewModel.isSearchByHouseName = true
+                            viewModel.isSearchingByCharacterName = false
+                        }
                     )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
