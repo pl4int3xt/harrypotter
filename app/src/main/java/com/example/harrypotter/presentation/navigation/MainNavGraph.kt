@@ -52,9 +52,7 @@ fun MainNavGraph(
         ){
             val characterDetails = navHostController.previousBackStackEntry?.savedStateHandle?.get<SingleCharacterModel>("details")
             if (characterDetails != null) {
-                DetailsScreen(
-                    singleCharacterModel =  characterDetails ,
-                    navHostController = navHostController)
+                DetailsScreen( singleCharacterModel =  characterDetails ,navHostController = navHostController)
             }
         }
 

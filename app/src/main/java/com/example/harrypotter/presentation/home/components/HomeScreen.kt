@@ -81,14 +81,13 @@ fun HomeScreen(
                     Spacer(modifier = Modifier.height(it.calculateBottomPadding()))
                 }
             }
+
             if (state.isLoading){
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
-                )
+                CircularProgressIndicator( modifier = Modifier.align(Alignment.Center))
             }
-            if (viewModel.filterDialogState){
-                FilterDialog(viewModel = viewModel)
-            }
+
+            if (viewModel.filterDialogState){ FilterDialog(viewModel = viewModel) }
+
             if (state.message.isNotEmpty()){
                 MessageDialog(viewModel = viewModel, message = state.message)
             }

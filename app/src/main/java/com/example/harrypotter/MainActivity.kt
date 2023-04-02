@@ -20,9 +20,7 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            HarrypotterTheme {
-                MainNavGraph(navHostController = rememberAnimatedNavController())
-            }
+            HarrypotterTheme { MainNavGraph(navHostController = rememberAnimatedNavController()) }
         }
     }
 }
