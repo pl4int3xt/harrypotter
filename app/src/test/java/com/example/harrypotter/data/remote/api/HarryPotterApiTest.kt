@@ -40,13 +40,16 @@ class HarryPotterApiTest {
     @Test
     fun testGetAllCharacters_returnCharacters() = runBlocking{
         val mockResponse = MockResponse()
-        mockResponse.setBody("[]")
+        val content = Helper.readFileResource("/response.json")
+        mockResponse.setResponseCode(200)
+        mockResponse.setBody(content)
         mockWebServer.enqueue(mockResponse)
 
         val response = harryPotterApi.getAllCharacters()
         mockWebServer.takeRequest()
 
-        Assert.assertEquals(true, response.body()!!.isEmpty())
+        Assert.assertEquals(false, response.body()!!.isEmpty())
+        Assert.assertEquals(2, response.body()!!.size)
     }
 
     @After
