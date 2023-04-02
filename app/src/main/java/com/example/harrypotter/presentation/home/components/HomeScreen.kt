@@ -50,7 +50,9 @@ fun HomeScreen(
                 colors = TopAppBarDefaults.smallTopAppBarColors(
                     containerColor = Color.Transparent ),
                 actions = {
-                    NavigationButton(onClick = { navHostController.navigate(Screens.) }, icon = Icons.Rounded.Search)
+                    NavigationButton(
+                        onClick = { navHostController.navigate(Screens.SearchScreen.route) },
+                        icon = Icons.Rounded.Search)
                 },
                 title = {}
             )
