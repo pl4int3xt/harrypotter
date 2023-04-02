@@ -42,6 +42,7 @@ fun SearchScreen(
             TopAppBar(
                 navigationIcon = {
                     SearchBar(
+                        onLeadingIconClicked = { navHostController.popBackStack() },
                         onFilterClicked = { viewModel.filterDialogState = true },
                         onSearch = {
                             if (viewModel.isSearchingByCharacterName)

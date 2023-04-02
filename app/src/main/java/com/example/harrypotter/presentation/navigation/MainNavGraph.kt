@@ -11,6 +11,7 @@ import com.example.harrypotter.domain.model.SingleCharacterModel
 import com.example.harrypotter.presentation.details.components.DetailsScreen
 import com.example.harrypotter.presentation.home.components.HomeScreen
 import com.example.harrypotter.presentation.screens.Screens
+import com.example.harrypotter.presentation.search.components.SearchScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
@@ -33,6 +34,7 @@ fun MainNavGraph(
                 }
             }
         ){ HomeScreen(navHostController = navHostController)}
+
         composable(
             route = Screens.DetailsScreen.route,
             enterTransition = {
@@ -57,5 +59,23 @@ fun MainNavGraph(
                     navHostController = navHostController)
             }
         }
+
+        composable(
+            route = Screens.SearchScreen.route,
+            enterTransition = {
+                when (targetState.destination.route) {
+                    navHostController.currentDestination?.route ->
+                        slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+                    else -> null
+                }
+            },
+            popExitTransition = {
+                when (targetState.destination.route) {
+                    navHostController.currentDestination?.route ->
+                        slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(1000))
+                    else -> null
+                }
+            }
+        ){ SearchScreen(navHostController = navHostController) }
     }
 }

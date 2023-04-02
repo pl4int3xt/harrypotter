@@ -6,8 +6,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Cancel
-import androidx.compose.material.icons.rounded.Fullscreen
 import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SearchBar(
     onFilterClicked: () -> Unit,
+    onLeadingIconClicked:() -> Unit,
     onSearch: () -> Unit,
     onReset: () -> Unit,
     value: String,
@@ -62,6 +63,11 @@ fun SearchBar(
                 keyboardController?.hide()
             }
         ),
+        leadingIcon = {
+            IconButton(onClick = { onLeadingIconClicked() }) {
+                Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = "back")
+            }
+        },
         trailingIcon = {
             if (value.isEmpty()){
                 IconButton(onClick = { onFilterClicked() }) {
