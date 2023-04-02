@@ -45,9 +45,9 @@ import com.example.harrypotter.presentation.details.DetailScreenViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsScreen(
+    navHostController: NavHostController,
     viewModel: DetailScreenViewModel = hiltViewModel(),
     singleCharacterModel: SingleCharacterModel,
-    navHostController: NavHostController
 ) {
     val scrollState = rememberScrollState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
