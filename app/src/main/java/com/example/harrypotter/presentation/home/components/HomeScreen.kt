@@ -4,8 +4,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.rounded.Cancel
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -15,9 +21,12 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.harrypotter.presentation.details.components.NavigationButton
 import com.example.harrypotter.presentation.home.HomeScreenEvents
 import com.example.harrypotter.presentation.home.HomeScreenViewModel
 import com.example.harrypotter.presentation.screens.Screens
@@ -30,8 +39,23 @@ fun HomeScreen(
 ) {
     val state = viewModel.state.value
     val characters = viewModel.allCharacters.value
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
-    Scaffold() {
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            TopAppBar(
+                scrollBehavior = scrollBehavior,
+                modifier = Modifier.padding(5.dp),
+                colors = TopAppBarDefaults.smallTopAppBarColors(
+                    containerColor = Color.Transparent ),
+                actions = {
+                    NavigationButton(onClick = { navHostController.navigate(Screens.) }, icon = Icons.Rounded.Search)
+                },
+                title = {}
+            )
+        }
+    ) {
         Box(modifier = Modifier.fillMaxSize()){
             LazyColumn(){
                 item {
