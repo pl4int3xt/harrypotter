@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
-import com.example.harrypotter.presentation.home.components.HomeScreen
 import com.example.harrypotter.presentation.navigation.MainNavGraph
 import com.example.harrypotter.presentation.theme.HarrypotterTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
