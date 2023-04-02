@@ -2,7 +2,7 @@
 <resources>
     <style name="Theme.Harrypotter.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#00C853</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/placeholder</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
         <item name="postSplashScreenTheme">@style/Theme.Harrypotter</item>
     </style>
 </resources>
