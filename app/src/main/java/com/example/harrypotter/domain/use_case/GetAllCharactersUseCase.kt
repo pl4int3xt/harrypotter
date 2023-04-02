@@ -17,8 +17,8 @@ class GetAllCharactersUseCase @Inject constructor(
     operator fun invoke(): Flow<Resource<List<SingleCharacterModel>>> = flow {
         try {
             emit(Resource.Loading())
-            val characters = harryPotterRepository.getAllCharacters().map { it.toSingleCharacterModel() }
-            emit(Resource.Success(characters))
+            val characters = harryPotterRepository.getAllCharacters().body()?.map { it.toSingleCharacterModel() }
+            emit(Resource.Success(characters!!))
         } catch (e: HttpException){
             emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
         } catch (e: IOException){

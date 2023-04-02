@@ -17,8 +17,8 @@ class GetCharacterByHouseUseCase @Inject constructor(
     operator fun invoke(houseName: String): Flow<Resource<List<SingleCharacterModel>>> = flow {
         try {
             emit(Resource.Loading())
-            val characters = harryPotterRepository.getCharacterByHouse(houseName). map { it.toSingleCharacterModel() }
-            emit(Resource.Success(characters))
+            val characters = harryPotterRepository.getCharacterByHouse(houseName).body()?.map { it.toSingleCharacterModel() }
+            emit(Resource.Success(characters!!))
         } catch (e: HttpException){
             emit(Resource.Error(e.localizedMessage ?:" An unexpected error occurred"))
         } catch (e: IOException){

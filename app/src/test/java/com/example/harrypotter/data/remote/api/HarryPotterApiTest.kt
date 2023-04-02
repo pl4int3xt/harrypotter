@@ -1,6 +1,5 @@
-package com.example.harrypotter.data.repository
+package com.example.harrypotter.data.remote.api
 
-import com.example.harrypotter.data.remote.api.HarryPotterApi
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -11,7 +10,7 @@ import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class FakeHarryPotterApiTest {
+class HarryPotterApiTest {
 
     lateinit var mockWebServer: MockWebServer
     lateinit var harryPotterApi: HarryPotterApi
@@ -35,12 +34,23 @@ class FakeHarryPotterApiTest {
         val response = harryPotterApi.getAllCharacters()
         mockWebServer.takeRequest()
 
-        Assert.assertEquals(true, response)
+        Assert.assertEquals(true, response.body()!!.isEmpty())
+    }
+
+    @Test
+    fun testGetAllCharacters_returnCharacters() = runBlocking{
+        val mockResponse = MockResponse()
+        mockResponse.setBody("[]")
+        mockWebServer.enqueue(mockResponse)
+
+        val response = harryPotterApi.getAllCharacters()
+        mockWebServer.takeRequest()
+
+        Assert.assertEquals(true, response.body()!!.isEmpty())
     }
 
     @After
     fun tearDown(){
         mockWebServer.shutdown()
     }
-
 }
