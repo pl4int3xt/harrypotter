@@ -18,6 +18,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.harrypotter.R
 import com.example.harrypotter.presentation.details.components.NavigationButton
 import com.example.harrypotter.presentation.home.HomeScreenViewModel
 import com.example.harrypotter.presentation.screens.Screens
@@ -88,7 +93,15 @@ fun HomeScreen(
             }
 
             if (state.isLoading){
-                CircularProgressIndicator( modifier = Modifier.align(Alignment.Center))
+                val lottieCompositionSpec by rememberLottieComposition(
+                    spec = LottieCompositionSpec.RawRes(R.raw.loading)
+                )
+                LottieAnimation(
+                    modifier = Modifier.align(Alignment.Center),
+                    composition = lottieCompositionSpec,
+                    iterations = Int.MAX_VALUE,
+                    alignment = Alignment.Center
+                )
             }
 
             if (viewModel.filterDialogState){ FilterDialog(viewModel = viewModel) }
