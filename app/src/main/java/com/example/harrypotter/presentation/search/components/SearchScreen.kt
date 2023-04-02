@@ -1,4 +1,4 @@
-package com.example.harrypotter.presentation.home.components
+package com.example.harrypotter.presentation.search.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
@@ -20,18 +20,43 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.harrypotter.presentation.home.HomeScreenEvents
 import com.example.harrypotter.presentation.home.HomeScreenViewModel
+import com.example.harrypotter.presentation.home.components.FilterDialog
+import com.example.harrypotter.presentation.home.components.MessageDialog
+import com.example.harrypotter.presentation.home.components.SearchBar
+import com.example.harrypotter.presentation.home.components.SingleCard
 import com.example.harrypotter.presentation.screens.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+fun SearchScreen(
     navHostController: NavHostController,
     viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
     val characters = viewModel.allCharacters.value
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
-    Scaffold() {
+    Scaffold (
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            TopAppBar(
+                navigationIcon = {
+                    SearchBar(
+                        onFilterClicked = { viewModel.filterDialogState = true },
+                        onSearch = {
+                            if (viewModel.isSearchingByCharacterName)
+                                viewModel.onEvent(HomeScreenEvents.OnSearchByCharacterName)
+                            else
+                                viewModel.onEvent(HomeScreenEvents.OnSearchByHouseName) },
+                        value = viewModel.searchValue,
+                        onValueChange = { viewModel.onEvent(HomeScreenEvents.OnSearchValueChanged(it))},
+                        onReset = { viewModel.onEvent(HomeScreenEvents.OnReset)}
+                    ) },
+                title = {},
+                scrollBehavior = scrollBehavior
+            )
+        }
+    ) {
         Box(modifier = Modifier.fillMaxSize()){
             LazyColumn(){
                 item {
