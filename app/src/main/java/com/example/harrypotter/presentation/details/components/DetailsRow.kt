@@ -12,6 +12,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun DetailsRow(
+    isList: Boolean = false,
+    list: List<String> = emptyList(),
     title: String,
     value: Any
 ) {
@@ -22,11 +24,21 @@ fun DetailsRow(
             fontSize = 20.sp
         )
         Spacer(modifier = Modifier.weight(1f))
-        Text(
-            text = value.toString(),
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
-        )
+        if (isList){
+            list.forEach {
+                Text(
+                    text = it.toString(),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
+            }
+        } else {
+            Text(
+                text = value.toString(),
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
+        }
     }
     Spacer(modifier = Modifier.height(10.dp))
 }
