@@ -52,6 +52,20 @@ class HarryPotterApiTest {
         Assert.assertEquals(2, response.body()!!.size)
     }
 
+    @Test
+    fun testGetAllCharacters_returnError() = runBlocking{
+        val mockResponse = MockResponse()
+        mockResponse.setResponseCode(404)
+        mockResponse.setBody("Something went wrong")
+        mockWebServer.enqueue(mockResponse)
+
+        val response = harryPotterApi.getAllCharacters()
+        mockWebServer.takeRequest()
+
+        Assert.assertEquals(false, response.isSuccessful)
+        Assert.assertEquals(404, response.code())
+    }
+
     @After
     fun tearDown(){
         mockWebServer.shutdown()
