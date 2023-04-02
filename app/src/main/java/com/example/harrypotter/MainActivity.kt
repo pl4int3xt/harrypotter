@@ -13,13 +13,21 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    var keepSplashOpened = true
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen()
+        installSplashScreen().setKeepOnScreenCondition{
+            keepSplashOpened
+        }
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            HarrypotterTheme { MainNavGraph(navHostController = rememberAnimatedNavController()) }
+            HarrypotterTheme {
+                MainNavGraph(
+                    onScreenLoaded = { keepSplashOpened = false },
+                    navHostController = rememberAnimatedNavController()
+                )
+            }
         }
     }
 }
