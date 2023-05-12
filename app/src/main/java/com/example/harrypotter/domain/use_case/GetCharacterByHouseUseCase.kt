@@ -21,9 +21,9 @@ class GetCharacterByHouseUseCase @Inject constructor(
             val characters = harryPotterRepository.getCharacterByHouse(houseName).body()?.map { it.toSingleCharacterModel() }
             emit(Resource.Success(Response.success(characters)))
         } catch (e: HttpException){
-            //emit(Resource.Error(e.localizedMessage ?:" An unexpected error occurred"))
+            emit(Resource.Error(e.localizedMessage ?:" An unexpected error occurred"))
         } catch (e: IOException){
-            //emit(Resource.Error("Can't reach server, check your internet connection"))
+            emit(Resource.Error("Can't reach server, check your internet connection"))
         }
     }
 }
