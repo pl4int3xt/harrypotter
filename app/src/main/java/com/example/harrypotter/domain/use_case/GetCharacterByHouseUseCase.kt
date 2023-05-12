@@ -8,21 +8,22 @@ import com.example.harrypotter.domain.repository.HarryPotterRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
+import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
 
 class GetCharacterByHouseUseCase @Inject constructor(
     private val harryPotterRepository: HarryPotterRepository
 ) {
-    operator fun invoke(houseName: String): Flow<Resource<List<SingleCharacterModel>>> = flow {
+    operator fun invoke(houseName: String): Flow<Resource<Response<List<SingleCharacterModel>>>> = flow {
         try {
             emit(Resource.Loading())
             val characters = harryPotterRepository.getCharacterByHouse(houseName).body()?.map { it.toSingleCharacterModel() }
-            emit(Resource.Success(characters!!))
+            emit(Resource.Success(Response.success(characters)))
         } catch (e: HttpException){
-            emit(Resource.Error(e.localizedMessage ?:" An unexpected error occurred"))
+            //emit(Resource.Error(e.localizedMessage ?:" An unexpected error occurred"))
         } catch (e: IOException){
-            emit(Resource.Error("Can't reach server, check your internet connection"))
+            //emit(Resource.Error("Can't reach server, check your internet connection"))
         }
     }
 }

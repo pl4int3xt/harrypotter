@@ -39,7 +39,7 @@ class HomeScreenViewModel @Inject constructor(
         getAllCharactersUseCase().onEach { result ->
             when(result){
                 is Resource.Success -> {
-                    this.allCharacters.value = result.data?: emptyList()
+                    this.allCharacters.value = result.data?.body()?: emptyList()
                     _state.value = HomeScreenState(isLoading = false)
                 }
                 is Resource.Loading -> {
@@ -56,7 +56,7 @@ class HomeScreenViewModel @Inject constructor(
         getCharacterByHouseUseCase(searchValue).onEach { result ->
             when(result){
                 is Resource.Success -> {
-                    this.allCharacters.value = result.data?: emptyList()
+                    this.allCharacters.value = result.data?.body()?: emptyList()
                     _state.value = HomeScreenState(isLoading = false)
                 }
                 is Resource.Loading -> {
