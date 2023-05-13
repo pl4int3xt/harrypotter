@@ -65,4 +65,6 @@
 # Keep Constants folder
 -keep class com.example.harrypotter.common.** {*;}
 -keep class com.example.harrypotter.constants.** {*;}
+
+# keep retrofit response class
 -keep class retrofit2.Response { *; }
